@@ -1,14 +1,14 @@
 package com.lucassilva.ilegrachallenge.service.conversor;
 
 import com.lucassilva.ilegrachallenge.builder.BuilderVendedor;
-import com.lucassilva.ilegrachallenge.model.Data;
+import com.lucassilva.ilegrachallenge.model.DadoFaturamento;
 import com.lucassilva.ilegrachallenge.model.Vendedor;
 
 public class ConversorVendedor extends ConversorDado {
 
 	@Override
-	public Data convert(String data) {
-		String[] campos = data.split(SEPARATOR_CHARACTER);
+	public DadoFaturamento convert(String data) {
+		String[] campos = data.split(CARACTER_SEPARADOR);
 
 		Vendedor vendedor = BuilderVendedor.builder()
 										   .cpf(campos[1])

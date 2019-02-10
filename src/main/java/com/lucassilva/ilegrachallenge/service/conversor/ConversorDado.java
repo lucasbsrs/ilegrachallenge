@@ -1,11 +1,11 @@
 package com.lucassilva.ilegrachallenge.service.conversor;
 
-import com.lucassilva.ilegrachallenge.model.Data;
+import com.lucassilva.ilegrachallenge.model.DadoFaturamento;
 
 public abstract class ConversorDado {
 
-	protected static final String SEPARATOR_CHARACTER = "ç";
+	protected static final String CARACTER_SEPARADOR = "ç";
 
-	public abstract Data convert(String data);
+	public abstract DadoFaturamento convert(String data);
 
 }

@@ -14,14 +14,14 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class DatFileManager extends FileManager {
+public class DadoGerenciadorArquivo extends GerenciadorArquivo {
 
 	private static final int PREFIXO_INICIO = 0;
 	private static final int PREFIXO_FIM = 3;
 
 	private Stream<Path> stream;
 
-	public DatFileManager(Path path) {
+	public DadoGerenciadorArquivo(Path path) {
 		super();
 		super.path = path;
 	}

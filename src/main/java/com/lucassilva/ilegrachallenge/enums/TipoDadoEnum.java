@@ -2,15 +2,18 @@ package com.lucassilva.ilegrachallenge.enums;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
+import com.lucassilva.ilegrachallenge.service.conversor.ConversorCliente;
 import com.lucassilva.ilegrachallenge.service.conversor.ConversorDado;
+import com.lucassilva.ilegrachallenge.service.conversor.ConversorVenda;
 import com.lucassilva.ilegrachallenge.service.conversor.ConversorVendedor;
 
 public enum TipoDadoEnum {
 
 	VENDEDOR("001", new ConversorVendedor()), 
-	CLIENTE("002", null), 
-	VENDA("003", null);
+	CLIENTE("002", new ConversorCliente()), 
+	VENDA("003", new ConversorVenda());
 
 	private String codigo;
 	private ConversorDado conversorDado;
@@ -28,9 +31,9 @@ public enum TipoDadoEnum {
 		return conversorDado;
 	}
 	
-	public static TipoDadoEnum getFromPrefix(String codigo) {
+	public static TipoDadoEnum get(String codigo) {
 		List<TipoDadoEnum> listaTipoDados = Arrays.asList(values());
-		return listaTipoDados.stream().filter(x -> x.codigo.equals(codigo)).findFirst().orElse(null);
+		return listaTipoDados.stream().filter(x -> x.codigo.equals(codigo)).findFirst().orElseThrow(() -> new NoSuchElementException("Código invalido."));
 	}
 
 }

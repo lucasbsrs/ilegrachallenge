@@ -1,6 +1,6 @@
 package com.lucassilva.ilegrachallenge.model;
 
-public class Vendedor extends Data{
+public class Vendedor extends DadoFaturamento{
 
 	private String cpf;
 	private String nome;

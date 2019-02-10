@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lucassilva.ilegrachallenge.enums.TipoDadoEnum;
-import com.lucassilva.ilegrachallenge.model.Data;
-import com.lucassilva.ilegrachallenge.service.file.DatFileManager;
-import com.lucassilva.ilegrachallenge.service.file.FileManager;
+import com.lucassilva.ilegrachallenge.model.DadoFaturamento;
+import com.lucassilva.ilegrachallenge.service.file.DadoGerenciadorArquivo;
+import com.lucassilva.ilegrachallenge.service.file.GerenciadorArquivo;
 
 public class ConversorArquivo implements Conversor {
 
@@ -21,23 +21,23 @@ public class ConversorArquivo implements Conversor {
 
 	@Override
 	public List<String> lerArquivo(List<Path> arquivosCarregados) throws IOException {
-		List<String> lines = new ArrayList<String>();
+		List<String> linhas = new ArrayList<String>();
 		for (Path path : arquivosCarregados) {
-			lines.addAll(retornaDados(path));
+			linhas.addAll(retornaDados(path));
 		}
-		return lines;
+		return linhas;
 	}
 
 	private List<String> retornaDados(Path path) throws IOException {
-		FileManager fileManager = new DatFileManager(path);
-		return fileManager.read();
+		GerenciadorArquivo arquivo = new DadoGerenciadorArquivo(path);
+		return arquivo.read();
 	}
 
 	@Override
-	public Data convert(String data) {
-		String prefix = data.substring(BEGIN_PREFIX, END_PREFIX);
-		TipoDadoEnum typeDataEnum = TipoDadoEnum.getFromPrefix(prefix);
-		return typeDataEnum.getConversorDado().convert(data);
+	public DadoFaturamento converter(String data) {
+		String codigo = data.substring(BEGIN_PREFIX, END_PREFIX);
+		TipoDadoEnum tipoDadoEnum = TipoDadoEnum.get(codigo);
+		return tipoDadoEnum.getConversorDado().convert(data);
 	}
 
 }
