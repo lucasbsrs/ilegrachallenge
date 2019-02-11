@@ -12,7 +12,7 @@ public class ConversorClienteTest {
 	@Test
 	public void deveConverterCliente() {
 		Conversor conversor = new ConversorArquivo();
-		Cliente cliente = (Cliente) conversor.converter("002ç2345675434544345çJose da SilvaçRural");
+		Cliente cliente = (Cliente) conversor.converter("002|2345675434544345|Jose da Silva|Rural");
 		Assert.assertEquals("2345675434544345", cliente.getCnpj());
 		Assert.assertEquals("Jose da Silva", cliente.getNome());
 		Assert.assertEquals("Rural", cliente.getAreaNegocio());

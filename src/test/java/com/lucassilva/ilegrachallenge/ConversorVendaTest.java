@@ -18,7 +18,7 @@ public class ConversorVendaTest {
 	public void deveConverterVenda() {
 		Conversor conversor = new ConversorArquivo();
 		List<Item> itens = new ArrayList<>();
-		Venda venda = (Venda) conversor.converter("003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çDiego");
+		Venda venda = (Venda) conversor.converter("003|10|[1-10-100,2-30-2.50,3-40-3.10]|Diego");
 		Assert.assertEquals(10, venda.getIdVenda().longValue());
 		Assert.assertEquals("Diego", venda.getVendedor());
 		Item item1 = BuilderItem.builder().idItem(1L).quantidade(10.0).preco(100.0).get();

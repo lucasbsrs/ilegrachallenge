@@ -56,7 +56,7 @@ public class ExportacaoDadosFaturamentoScheduler {
 		arquivoUtil.gravarArquivo(
 				ArquivoConfig.PATH_SAIDA.resolve(
 						arquivo.getName().replace(ArquivoConfig.EXTENSAO_DAT, ArquivoConfig.EXTENSAO_DONE_DAT)),
-				analiseDados.getLinhasAnalise());
+				analiseDados.getVendedorComMenosVendas().toString());
 	}
 
 	private void removerArquivo(File arquivo) {

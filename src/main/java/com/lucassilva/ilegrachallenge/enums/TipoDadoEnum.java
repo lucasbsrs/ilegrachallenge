@@ -33,7 +33,7 @@ public enum TipoDadoEnum {
 	
 	public static TipoDadoEnum get(String codigo) {
 		List<TipoDadoEnum> listaTipoDados = Arrays.asList(values());
-		return listaTipoDados.stream().filter(x -> x.codigo.equals(codigo)).findFirst().orElseThrow(() -> new NoSuchElementException("Código invalido."));
+		return listaTipoDados.stream().filter(dado -> dado.codigo.equals(codigo)).findFirst().orElseThrow(() -> new NoSuchElementException("Código invalido."));
 	}
 
 }
