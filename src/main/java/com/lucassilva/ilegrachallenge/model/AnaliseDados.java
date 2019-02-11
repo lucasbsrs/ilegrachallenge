@@ -1,10 +1,5 @@
 package com.lucassilva.ilegrachallenge.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.lucassilva.ilegrachallenge.service.conversor.ConversorDado;
-
 public class AnaliseDados {
 
 	private Long totalClientes;
@@ -44,15 +39,16 @@ public class AnaliseDados {
 		this.vendedorComMenosVendas = vendedorComMenosVendas;
 	}
 
-	public List<String> getLinhasAnalise() {
-		List<String> lines = new ArrayList<>();
-		lines.add("Total Clientes: " + this.totalClientes);
-		lines.add("Total Vendedores: " + this.totalVendedores);
-		lines.add("ID Venda mais cara: " + this.idVendaMaisCara);
-		lines.add("Vendedor com menor venda: " + this.vendedorComMenosVendas.getNome());
-		return lines;
+	public String getLinhasAnalise() {
+		StringBuilder analise = new StringBuilder();
+		analise.append("Total Clientes: " + this.totalClientes);
+		analise.append("\n");
+		analise.append("Total Vendedores: " + this.totalVendedores);
+		analise.append("\n");
+		analise.append("ID Venda mais cara: " + this.idVendaMaisCara);
+		analise.append("\n");
+		analise.append("Vendedor com menor venda: " + this.vendedorComMenosVendas.getNome());
+		return analise.toString();
 	}
-	
-	
 
 }

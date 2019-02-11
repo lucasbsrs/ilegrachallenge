@@ -18,7 +18,7 @@ import com.lucassilva.ilegrachallenge.util.ArquivoUtil;
 
 @Controller
 @EnableScheduling
-public class ExportarDados {
+public class ExportacaoDadosFaturamentoScheduler {
 
 	@Autowired
 	private ArquivoUtil arquivoUtil;
@@ -56,7 +56,7 @@ public class ExportarDados {
 		arquivoUtil.gravarArquivo(
 				ArquivoConfig.PATH_SAIDA.resolve(
 						arquivo.getName().replace(ArquivoConfig.EXTENSAO_DAT, ArquivoConfig.EXTENSAO_DONE_DAT)),
-				analiseDados.getVendedorComMenosVendas().toString());
+				analiseDados.getLinhasAnalise());
 	}
 
 	private void removerArquivo(File arquivo) {

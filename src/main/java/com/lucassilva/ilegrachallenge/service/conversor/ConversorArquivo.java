@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.lucassilva.ilegrachallenge.enums.TipoDadoEnum;
 import com.lucassilva.ilegrachallenge.model.DadoFaturamento;
-import com.lucassilva.ilegrachallenge.service.file.DadoGerenciadorArquivo;
 
 @Service
 public class ConversorArquivo implements Conversor {

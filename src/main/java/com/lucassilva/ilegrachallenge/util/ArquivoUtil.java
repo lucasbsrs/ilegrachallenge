@@ -1,9 +1,6 @@
 package com.lucassilva.ilegrachallenge.util;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,8 +12,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ArquivoUtil {
-
-	private BufferedReader br;
 
 	public List<File> listarArquivosDoDiretorio(Path path) throws IOException {
 		return Files.walk(path).filter(Files::isRegularFile).filter(x -> x.toString().endsWith(".dat"))

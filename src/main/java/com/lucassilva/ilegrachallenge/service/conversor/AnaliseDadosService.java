@@ -21,10 +21,10 @@ import com.lucassilva.ilegrachallenge.model.Vendedor;
 public class AnaliseDadosService {
 
 	public AnaliseDados analisar(List<DadoFaturamento> linhasArquivo) {
-		Long totalCliente = retornaTotalClientes(linhasArquivo);
-		Long totalVendedores = retornaTotalVendedores(linhasArquivo);
-		Long vendaMaisCara = retornaVendaMaisCara(linhasArquivo);
-		Vendedor vendedorComMenosVendas = retornaVendedorComMenosVendas(linhasArquivo);
+		Long totalCliente = getTotalClientes(linhasArquivo);
+		Long totalVendedores = getTotalVendedores(linhasArquivo);
+		Long vendaMaisCara = getVendaMaisCara(linhasArquivo);
+		Vendedor vendedorComMenosVendas = getVendedorComMenosVendas(linhasArquivo);
 
 		AnaliseDados analiseDados = BuilderAnaliseDados.builder().totalClientes(totalCliente)
 				.totalVendedores(totalVendedores).idVendaMaisCara(vendaMaisCara)
@@ -33,29 +33,29 @@ public class AnaliseDadosService {
 		return analiseDados;
 	}
 
-	private long retornaTotalVendedores(List<DadoFaturamento> linhasArquivo) {
+	private long getTotalVendedores(List<DadoFaturamento> linhasArquivo) {
 		return linhasArquivo.stream().filter(Vendedor.class::isInstance).count();
 	}
 
-	private long retornaTotalClientes(List<DadoFaturamento> linhasArquivo) {
+	private long getTotalClientes(List<DadoFaturamento> linhasArquivo) {
 		return linhasArquivo.stream().filter(Cliente.class::isInstance).count();
 	}
 
-	private Long retornaVendaMaisCara(List<DadoFaturamento> linhasDoArquivoNormalizadas) {
+	private Long getVendaMaisCara(List<DadoFaturamento> linhasDoArquivoNormalizadas) {
 		List<Venda> vendas = getVendas(linhasDoArquivoNormalizadas);
 
 		if (vendas.isEmpty())
-			return 0l;
+			return 0L;
 
 		return Collections.max(vendas, Comparator.comparing(Venda::getValorPedido)).getIdVenda();
 	}
 
 	private List<Venda> getVendas(List<DadoFaturamento> linhasDoArquivoNormalizadas) {
-		return linhasDoArquivoNormalizadas.stream().filter(Venda.class::isInstance).map(x -> (Venda) x)
+		return linhasDoArquivoNormalizadas.stream().filter(Venda.class::isInstance).map(venda -> (Venda) venda)
 				.collect(Collectors.toList());
 	}
 
-	private Vendedor retornaVendedorComMenosVendas(List<DadoFaturamento> linhasDoArquivoNormalizadas) {
+	private Vendedor getVendedorComMenosVendas(List<DadoFaturamento> linhasDoArquivoNormalizadas) {
 		List<Vendedor> vendedores = getVendedores(linhasDoArquivoNormalizadas);
 
 		List<Venda> vendas = getVendas(linhasDoArquivoNormalizadas);
@@ -63,7 +63,7 @@ public class AnaliseDadosService {
 		Map<Vendedor, Double> relacaoDeVendasPorVendedor = new HashMap<>();
 
 		vendedores.forEach(vendedor -> {
-			List<Venda> vendasDoVendedor = vendas.stream().filter(x -> x.getVendedor().equals(vendedor.getNome()))
+			List<Venda> vendasDoVendedor = vendas.stream().filter(venda -> venda.getVendedor().equals(vendedor.getNome()))
 					.collect(Collectors.toList());
 
 			Double totalVendas = vendasDoVendedor.stream().mapToDouble(Venda::getValorPedido).sum();
@@ -75,7 +75,7 @@ public class AnaliseDadosService {
 	}
 
 	private List<Vendedor> getVendedores(List<DadoFaturamento> linhasDoArquivoNormalizadas) {
-		return linhasDoArquivoNormalizadas.stream().filter(Vendedor.class::isInstance).map(x -> (Vendedor) x)
+		return linhasDoArquivoNormalizadas.stream().filter(Vendedor.class::isInstance).map(vendedor -> (Vendedor) vendedor)
 				.collect(Collectors.toList());
 	}
 
