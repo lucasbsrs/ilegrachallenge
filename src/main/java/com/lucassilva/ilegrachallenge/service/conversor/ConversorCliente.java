@@ -10,7 +10,7 @@ public class ConversorCliente extends ConversorDado {
 	
 	@Override
 	public DadoFaturamento convert(String data) {
-		String[] campos = data.split(CARACTER_SEPARADOR);
+		String[] campos = data.split(SEPARADOR_DADOS);
 
 		Cliente cliente = BuilderCliente.builder()
 										.cnpj(campos[ArquivoPosicoesConfig.POSICAO_CLIENTE_CNPJ])

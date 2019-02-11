@@ -14,21 +14,24 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class DadoGerenciadorArquivo extends GerenciadorArquivo {
+import org.springframework.stereotype.Component;
+
+import com.lucassilva.ilegrachallenge.config.ArquivoConfig;
+
+@Component
+public class DadoGerenciadorArquivo {
 
 	private static final int PREFIXO_INICIO = 0;
 	private static final int PREFIXO_FIM = 3;
 
 	private Stream<Path> stream;
 
-	public DadoGerenciadorArquivo(Path path) {
-		super();
-		super.path = path;
+	public DadoGerenciadorArquivo() {
+		
 	}
 
-	@Override
 	public void write(List<String> lines) throws IOException {
-		File file = new File(super.path.toString());
+		File file = new File(ArquivoConfig.PATH_SAIDA.toString());
 		file.getParentFile().mkdirs();
 		try (OutputStream outputStream = new FileOutputStream(file)) {
 			if (file.createNewFile()) {
@@ -40,10 +43,9 @@ public class DadoGerenciadorArquivo extends GerenciadorArquivo {
 		}
 	}
 
-	@Override
 	public List<String> read() throws IOException {
 		List<String> lines = new ArrayList<>();
-		try (InputStream is = new FileInputStream(path.toString())) {
+		try (InputStream is = new FileInputStream(ArquivoConfig.PATH_ENTRADA.toString())) {
 			try (Scanner scanner = new Scanner(is)) {
 				while (scanner.hasNext()) {
 					String linhaAtual = scanner.nextLine().trim();
@@ -55,16 +57,18 @@ public class DadoGerenciadorArquivo extends GerenciadorArquivo {
 						}
 					}
 				}
+				
 			}
 		}
 		return lines;
 	}
 
-	@Override
 	public List<Path> retornaTodosArquivosDiretorio() throws IOException {
-		stream = Files.walk(path);
+		stream = Files.walk(ArquivoConfig.PATH_ENTRADA);
 
 		return stream.filter(Files::isRegularFile).filter(x -> x.toString().endsWith(".dat"))
 				.collect(Collectors.toList());
+
 	}
+
 }

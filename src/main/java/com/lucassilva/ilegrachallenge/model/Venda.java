@@ -42,5 +42,9 @@ public class Venda extends DadoFaturamento {
 	public void setVendedor(String vendedor) {
 		this.vendedor = vendedor;
 	}
+	
+	public Double getValorPedido() {
+		return listaItens.stream().mapToDouble(x -> x.getQuantidade() * x.getPreco()).sum();
+	}
 
 }
